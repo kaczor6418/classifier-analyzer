@@ -10,4 +10,8 @@ To run this program you need python 3.6.9 and you also need to install below dep
 
 ### Run
 
-Open **main.py** file and run ```run_program()``` function
+Go into *lab1/* directory and run this command in your terminall:
+
+```bash
+python main.py
+```
