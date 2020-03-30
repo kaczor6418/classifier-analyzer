@@ -10,5 +10,5 @@ class Leaf:
         self.metadata = metadata
         self.leaf_name_id = self.metadata[0]
 
-    def make_point_from_traits(self, trait_x_id: int, trait_y_id: int) -> Point:
+    def create_point_from_traits(self, trait_x_id: int, trait_y_id: int) -> Point:
         return Point(self.metadata[trait_x_id], self.metadata[trait_y_id])

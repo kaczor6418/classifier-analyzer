@@ -7,8 +7,8 @@ from src.Leaf import Leaf
 class ConvertDataFrameToLeafs:
 
     @staticmethod
-    def convert(data_frame: pd.DataFrame) -> List[Leaf]:
+    def convert(df: pd.DataFrame) -> List[Leaf]:
         leafs: List[Leaf] = []
-        for np_array_element in data_frame.values:
+        for np_array_element in df.values:
             leafs.append(Leaf(np_array_element))
         return leafs

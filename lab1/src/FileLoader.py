@@ -1,3 +1,5 @@
+import sys
+
 import pandas as pd
 
 
@@ -8,4 +10,4 @@ class FileLoader:
         try:
             return pd.read_csv(path, header=None)
         except(FileNotFoundError, pd.errors.EmptyDataError):
-            print('Can not load csv file')
+            sys.exit('Can not load csv file')
