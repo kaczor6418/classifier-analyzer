@@ -1,11 +1,11 @@
-import pandas as pd
 from typing import List
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
 from src.FileLoader import FileLoader
 from src.Leaf import Leaf
-from src.Point import Point
 from src.converters.ConvertDataFrameToLeafs import ConvertDataFrameToLeafs
-from sklearn.model_selection import train_test_split
 
 
 class LeafsDatabase:
