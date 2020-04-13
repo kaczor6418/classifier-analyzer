@@ -1,7 +1,7 @@
 ## Classify leafs using NN - classifier
 
 ### Instalation:
-To run this program you need python 3.6.9 and you also need to install below dependencies:
+To run this program you need python 3.8.2 and you also need to install below dependencies:
 
  - matplotlib.pyplo
  - pandas
