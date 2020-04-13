@@ -5,12 +5,6 @@ from src.Point import Point
 
 
 class ChartWizard:
-    marker_a: str = 's'
-    marker_b: str = '^'
-    new_elements_marker = '*'
-    color_a: str = 'red'
-    color_b: str = 'blue'
-    new_element_color: str = 'green'
 
     @staticmethod
     def draw_chart() -> None:
@@ -21,14 +15,13 @@ class ChartWizard:
         plt.xlabel(x_label_name)
         plt.ylabel(y_label_name)
 
-    def add_points_a_and_b_points(self, points_a: List[Point], points_b: List[Point]) -> None:
-        x_points_of_a = Point.get_only_x_points(points_a)
-        y_points_of_a = Point.get_only_y_points(points_a)
-        x_points_of_b = Point.get_only_x_points(points_b)
-        y_points_of_b = Point.get_only_y_points(points_b)
-        plt.scatter(x=x_points_of_a, y=y_points_of_a, c=self.color_a, marker=self.marker_a)
-        plt.scatter(x=x_points_of_b, y=y_points_of_b, c=self.color_b, marker=self.marker_b)
+    @staticmethod
+    def append_points(points: List[Point], color: str, marker: str) -> None:
+        only_x_values = Point.get_only_x_points(points)
+        only_y_values = Point.get_only_y_points(points)
+        plt.scatter(x=only_x_values, y=only_y_values, c=color, marker=marker)
 
-    def append_point_with_annotation_to_chart(self, point: Point, annotation) -> None:
-        plt.scatter(x=point.x, y=point.y, c=self.new_element_color, marker=self.new_elements_marker)
+    @staticmethod
+    def append_point_with_annotation_to_chart(point: Point, annotation: str, color: str, marker: str) -> None:
+        plt.scatter(x=point.x, y=point.y, c=color, marker=marker)
         plt.annotate(annotation, (point.x, point.y))
