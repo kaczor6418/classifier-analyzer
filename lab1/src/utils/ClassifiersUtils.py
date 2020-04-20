@@ -1,3 +1,7 @@
+from typing import List
+
+import numpy as np
+
 from src.classifiers.typedDictionaries.NearestElement import NearestElement
 
 
@@ -8,3 +12,10 @@ class ClassifiersUtils:
             'element_id': element_id,
             'distance': distance
         }
+
+    @staticmethod
+    def get_values_by_indexes(array: np.ndarray, indexes: List[int]) -> List[float]:
+        filtered_array: List[float] = []
+        for i in indexes:
+            filtered_array.append(array[i])
+        return filtered_array

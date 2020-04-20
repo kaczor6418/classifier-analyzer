@@ -9,19 +9,16 @@ from src.converters.ConverterDataFrameToDatasetElement import ConverterDataFrame
 
 
 class DataTable:
-    trait_x_id: int
-    trait_y_id: int
-
     leafs_metadata: pd.DataFrame
 
+    chosen_traits: List[int]
     train_dataset: List[DatasetElement] = list()
     test_dataset: List[DatasetElement] = list()
     class_id_with_train_dataset: Dict[int, List[DatasetElement]] = dict()
 
-    def __init__(self, file_path: str, classes_ids: List[int], trait_x_id: int, trait_y_id) -> None:
-        self.trait_x_id = trait_x_id
-        self.trait_y_id = trait_y_id
+    def __init__(self, file_path: str, classes_ids: List[int], chosen_traits: List[int]) -> None:
         self.leafs_metadata = FileLoader.load_data_from_csv(file_path)
+        self.chosen_traits = chosen_traits;
         self.create_train_and_test_groups(classes_ids)
 
     def get_leafs_metadata_from_leaf_name_id(self, leaf_name_id: int) -> pd.DataFrame:
