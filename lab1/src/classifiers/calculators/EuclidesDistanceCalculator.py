@@ -2,14 +2,13 @@ from typing import List
 
 import numpy as np
 
+from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
 from src.utils.ClassifiersUtils import ClassifiersUtils
 
 
-class EuclidesDistanceCalculator:
-    compared_traits: List[int]
-
+class EuclidesDistanceCalculator(AbstractCalculator):
     def __init__(self, compared_traits: List[int]) -> None:
-        self.compared_traits = compared_traits
+        super().__init__(compared_traits)
 
     def calculate_similarity(self, compared_element: np.ndarray, reference_element: np.ndarray) -> float:
         compared_values: np.ndarray = np.array(

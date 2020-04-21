@@ -1,16 +1,16 @@
 from typing import List
 
-from src.DatasetElement import DatasetElement
+import numpy as np
+
+from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
 
 
-class StandardDeviationCalculator:
-    compared_traits: List[int]
-
+class StandardDeviationCalculator(AbstractCalculator):
     def __init__(self, compared_traits: List[int]) -> None:
-        self.compared_traits = compared_traits
+        super().__init__(compared_traits)
 
-    def calculate_similarity(self, compared_element: DatasetElement, reference_element: DatasetElement) -> float:
+    def calculate_similarity(self, compared_element: np.ndarray, reference_element: np.ndarray) -> float:
         deviation: float = 0
         for trait_id in self.compared_traits:
-            deviation += abs(reference_element.metadata[trait_id] - compared_element.metadata[trait_id])
+            deviation += abs(reference_element[trait_id] - compared_element[trait_id])
         return deviation
