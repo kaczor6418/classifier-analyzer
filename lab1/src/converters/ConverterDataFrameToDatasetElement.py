@@ -1,7 +1,7 @@
 import pandas as pd
 from typing import List
 
-from src.DatasetElement import DatasetElement
+from src.structures.DatasetElement import DatasetElement
 
 
 class ConverterDataFrameToDatasetElements:

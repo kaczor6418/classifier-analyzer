@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from typing import List
 
-from src.Point import Point
+from src.structures.Point import Point
 
 
 class ChartWizard:

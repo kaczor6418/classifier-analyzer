@@ -3,7 +3,7 @@ from typing import List
 
 import numpy as np
 
-from src.DatasetElement import DatasetElement
+from src.structures.DatasetElement import DatasetElement
 from src.classifiers.calculatorFactory.CalculatorType import CalculatorType
 from src.classifiers.calculatorFactory.CalculatorsFactory import CalculatorsFactory
 from src.classifiers.calculators.AbstractCalculator import AbstractCalculator

@@ -1,5 +1,5 @@
 import numpy as np
-from src.Point import Point
+from src.structures.Point import Point
 
 
 class DatasetElement:
