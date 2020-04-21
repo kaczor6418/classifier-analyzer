@@ -1,4 +1,18 @@
 leaf_trait_id_and_name = {
+    1: 'Class',
+    2: 'Specimen Number',
+    3: 'Eccentricity',
     4: 'Aspect Ratio',
-    7: 'Stochastic Convexity'
+    5: 'Elongation',
+    6: 'Solidity',
+    7: 'Stochastic Convexity',
+    8: 'Isoperimetric Factor',
+    9: 'Maximal Indentation Depth',
+    10: 'Lobedness',
+    11: 'Average Intensity',
+    12: 'Average Contrast',
+    13: 'Smoothness',
+    14: 'Third moment',
+    15: 'Uniformity',
+    16: 'Entropy',
 }

@@ -1,13 +1,13 @@
 from typing import List
 
-from src.drawers.ChartWizard import ChartWizard
-from src.structures.DataTable import DataTable
-from src.structures.Point import Point
 from src.classifiers.ClassifierKNN import ClassifierKNN
 from src.classifiers.ClassifierNN import ClassifierNN
 from src.converters.ConverterDatasetElementsToPoints import ConverterDatasetElementsToPoints
 from src.dictionaries.leafIdNameDictionary import leaf_id_and_name
 from src.dictionaries.leafTraitIdNameDictionary import leaf_trait_id_and_name
+from src.drawers.ChartWizard import ChartWizard
+from src.structures.DataTable import DataTable
+from src.structures.Point import Point
 
 csv_file_path = 'leaf/leaf.csv'
 trait_x_id = 4
