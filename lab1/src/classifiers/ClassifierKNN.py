@@ -1,26 +1,33 @@
 import math
 from typing import List, Dict
 
+import numpy as np
+
 from src.DatasetElement import DatasetElement
-from src.Point import Point
+from src.classifiers.calculatorFactory.CalculatorType import CalculatorType
+from src.classifiers.calculatorFactory.CalculatorsFactory import CalculatorsFactory
+from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
 from src.classifiers.typedDictionaries.NearestElement import NearestElement
 from src.utils.ClassifiersUtils import ClassifiersUtils
 
 
 class ClassifierKNN:
     train_group: List[DatasetElement]
+    calculator: AbstractCalculator
     k: int
 
-    def __init__(self, train_group: List[DatasetElement], k: int) -> None:
-        self.train_group = train_group
+    def __init__(self, train_group: List[DatasetElement], compared_traits: List[int], k: int,
+                 calculator_type: CalculatorType = CalculatorType.EUCLIDES) -> None:
+        calculator_factory: CalculatorsFactory = CalculatorsFactory(compared_traits)
         self.k = k
+        self.train_group = train_group
+        self.calculator = calculator_factory.get_calculator(calculator_type)
 
-    def classify(self, test_element: Point, trait_x_id: int, trait_y_id: int) -> int:
+    def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
         elements_id_distances: Dict[int, List[float]] = dict()
         for train_element in self.train_group:
-            train_element_point: Point = train_element.create_point_from_traits(trait_x_id, trait_y_id)
-            distance: float = test_element.calculate_distance_to_point(train_element_point)
+            distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
             if elements_id_distances.get(train_element.element_id) is None:
                 elements_id_distances[train_element.element_id] = [distance]
             else:

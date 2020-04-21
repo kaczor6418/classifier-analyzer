@@ -21,7 +21,7 @@ class ClassifierNN:
         self.train_group = train_group
         self.calculator = calculator_factory.get_calculator(calculator_type)
 
-    def classify(self, test_element: np.ndarray, ) -> int:
+    def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
         for train_element in self.train_group:
             distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
