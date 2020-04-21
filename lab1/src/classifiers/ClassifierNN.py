@@ -1,23 +1,30 @@
 import math
 from typing import List
 
+import numpy as np
+
 from src.DatasetElement import DatasetElement
-from src.Point import Point
+from src.classifiers.calculatorFactory.CalculatorType import CalculatorType
+from src.classifiers.calculatorFactory.CalculatorsFactory import CalculatorsFactory
+from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
 from src.classifiers.typedDictionaries.NearestElement import NearestElement
 from src.utils.ClassifiersUtils import ClassifiersUtils
 
 
 class ClassifierNN:
     train_group: List[DatasetElement]
+    calculator: AbstractCalculator
 
-    def __init__(self, train_group: List[DatasetElement]) -> None:
+    def __init__(self, train_group: List[DatasetElement], compared_traits: List[int],
+                 calculator_type: CalculatorType = CalculatorType.EUCLIDES) -> None:
+        calculator_factory: CalculatorsFactory = CalculatorsFactory(compared_traits)
         self.train_group = train_group
+        self.calculator = calculator_factory.get_calculator(calculator_type)
 
-    def classify(self, test_element: Point, trait_x_id: int, trait_y_id: int) -> int:
+    def classify(self, test_element: np.ndarray, ) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
         for train_element in self.train_group:
-            train_element_point: Point = train_element.create_point_from_traits(trait_x_id, trait_y_id)
-            distance: float = test_element.calculate_distance_to_point(train_element_point)
+            distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
             if distance < nearest_element_id_distance['distance']:
                 nearest_element_id_distance = ClassifiersUtils.create_nearest_element(train_element.element_id,
                                                                                       distance)
