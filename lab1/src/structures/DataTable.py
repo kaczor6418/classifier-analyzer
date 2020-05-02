@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from src.converters.ConverterDataFrameToDatasetElement import ConverterDataFrameToDatasetElements
-from src.loaders.FileLoader import FileLoader
+from src.loaders.CsvFileLoader import CsvFileLoader
 from src.structures.DatasetElement import DatasetElement
 
 
@@ -18,7 +18,7 @@ class DataTable:
 
     def __init__(self, file_path: str, classes_ids: List[int], chosen_traits: List[int],
                  test_group_size: float = 0.2) -> None:
-        self.elements_data = FileLoader.load_data_from_csv(file_path)
+        self.elements_data = CsvFileLoader.load_file(file_path)
         self.chosen_traits = chosen_traits
         self.create_train_and_test_groups(classes_ids, test_group_size)
 

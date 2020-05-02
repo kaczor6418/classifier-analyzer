@@ -2,7 +2,7 @@ from typing import List
 
 import numpy as np
 
-from src.classifiers.typedDictionaries.NearestElement import NearestElement
+from src.classifiers.types.NearestElement import NearestElement
 
 
 class ClassifiersUtils:

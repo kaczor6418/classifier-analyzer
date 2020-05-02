@@ -1,9 +1,9 @@
 from typing import List
 
-from src.classifiers.calculators.CalculatorType import CalculatorType
-from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
-from src.classifiers.calculators.EuclidesDistanceCalculator import EuclidesDistanceCalculator
-from src.classifiers.calculators.StandardDevationCalculator import StandardDeviationCalculator
+from src.calculators.types.CalculatorType import CalculatorType
+from src.calculators.AbstractCalculator import AbstractCalculator
+from src.calculators.EuclidesDistanceCalculator import EuclidesDistanceCalculator
+from src.calculators.StandardDevationCalculator import StandardDeviationCalculator
 
 
 class CalculatorsFactory:

@@ -3,10 +3,10 @@ import sys
 import pandas as pd
 
 
-class FileLoader:
+class CsvFileLoader:
 
     @staticmethod
-    def load_data_from_csv(path) -> pd.DataFrame:
+    def load_file(path: str) -> pd.DataFrame:
         try:
             return pd.read_csv(path, header=None)
         except(FileNotFoundError, pd.errors.EmptyDataError):

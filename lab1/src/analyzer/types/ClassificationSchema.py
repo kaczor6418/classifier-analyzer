@@ -1,7 +1,7 @@
 from typing import TypedDict
 
-from src.classifiers.ClassifeirsTypes import ClassifierType
-from src.classifiers.calculators.CalculatorType import CalculatorType
+from src.classifiers.types.ClassifeirsTypes import ClassifierType
+from src.calculators.types.CalculatorType import CalculatorType
 
 
 class NNClassification(TypedDict):

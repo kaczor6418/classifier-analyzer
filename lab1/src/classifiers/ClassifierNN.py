@@ -4,10 +4,10 @@ from typing import List
 import numpy as np
 
 from src.structures.DatasetElement import DatasetElement
-from src.classifiers.calculators.CalculatorType import CalculatorType
-from src.classifiers.factories.CalculatorsFactory import CalculatorsFactory
-from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
-from src.classifiers.typedDictionaries.NearestElement import NearestElement
+from src.calculators.types.CalculatorType import CalculatorType
+from src.factories.CalculatorsFactory import CalculatorsFactory
+from src.calculators.AbstractCalculator import AbstractCalculator
+from src.classifiers.types.NearestElement import NearestElement
 from src.utils.ClassifiersUtils import ClassifiersUtils
 
 

@@ -2,7 +2,7 @@ from typing import List
 
 import numpy as np
 
-from src.classifiers.calculators.AbstractCalculator import AbstractCalculator
+from src.calculators.AbstractCalculator import AbstractCalculator
 
 
 class StandardDeviationCalculator(AbstractCalculator):
