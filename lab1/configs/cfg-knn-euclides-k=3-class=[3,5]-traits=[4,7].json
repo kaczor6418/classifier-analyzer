@@ -1,5 +1,5 @@
 {
-  "csv_file_path": "",
+  "csv_file_path": "leaf/leaf.csv",
   "test_group_size": 0.2,
   "x_axis_trait_id": 4,
   "y_axis_trait_id": 7,
