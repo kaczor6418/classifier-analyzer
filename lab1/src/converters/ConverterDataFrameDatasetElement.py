@@ -4,10 +4,10 @@ from typing import List
 from src.structures.DatasetElement import DatasetElement
 
 
-class ConverterDataFrameToDatasetElements:
+class ConverterDataFrameDatasetElements:
 
     @staticmethod
-    def convert(df: pd.DataFrame) -> List[DatasetElement]:
+    def to_dataset_elements(df: pd.DataFrame) -> List[DatasetElement]:
         dataset_elements: List[DatasetElement] = []
         for np_array_element in df.values:
             dataset_elements.append(DatasetElement(np_array_element))

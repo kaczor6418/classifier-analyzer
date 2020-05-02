@@ -3,7 +3,7 @@ from typing import List, Dict
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from src.converters.ConverterDataFrameToDatasetElement import ConverterDataFrameToDatasetElements
+from src.converters.ConverterDataFrameDatasetElement import ConverterDataFrameDatasetElements
 from src.loaders.CsvFileLoader import CsvFileLoader
 from src.structures.DatasetElement import DatasetElement
 
@@ -30,8 +30,8 @@ class DataTable:
         for class_id in classes_ids:
             class_metadata: pd.DataFrame = self.get_element_metadata_from_element_name_id(class_id)
             every_class_metadata.append(class_metadata)
-            self.class_id_with_train_dataset[class_id] = ConverterDataFrameToDatasetElements.convert(class_metadata)
+            self.class_id_with_train_dataset[class_id] = ConverterDataFrameDatasetElements.to_dataset_elements(class_metadata)
         train_metadata, test_metadata = train_test_split(pd.concat(every_class_metadata), test_size=test_group_size,
                                                          random_state=222)
-        self.train_dataset = ConverterDataFrameToDatasetElements.convert(train_metadata)
-        self.test_dataset = ConverterDataFrameToDatasetElements.convert(test_metadata)
+        self.train_dataset = ConverterDataFrameDatasetElements.to_dataset_elements(train_metadata)
+        self.test_dataset = ConverterDataFrameDatasetElements.to_dataset_elements(test_metadata)

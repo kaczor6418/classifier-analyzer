@@ -4,7 +4,7 @@ from src.analyzer.types.AnalyzerSchema import AnalyzerSchema
 from src.analyzer.types.ClassesSchema import ClassSchema
 from src.analyzer.types.ClassifiedElementSchema import ClassifiedElementSchema
 from src.classifiers.AbstractClassifier import AbstractClassifier
-from src.converters.ConverterDatasetElementsToPoints import ConverterDatasetElementsToPoints
+from src.converters.ConverterDatasetElementsPoints import ConverterDatasetElementsPoints
 from src.dictionaries.leafIdNameDictionary import leaf_id_and_name
 from src.dictionaries.leafTraitIdNameDictionary import leaf_trait_id_and_name
 from src.drawers.ChartWizard import ChartWizard
@@ -20,7 +20,7 @@ class Analyzer:
     datatable: DataTable
     classifier: AbstractClassifier
     classes_config: List[ClassSchema]
-    classified_element_config: ClassifiedElementSchema
+    classified_element_config: ClassifiedElementSchema = dict()
 
     def __init__(self, config: AnalyzerSchema) -> None:
         self.datatable = self.create_datatable(config['csv_file_path'], config['traits_ids'], config['classes_config'],
@@ -31,11 +31,7 @@ class Analyzer:
         self.x_axis_trait_id = config['x_axis_trait_id']
         self.y_axis_trait_id = config['y_axis_trait_id']
         self.classes_config = config['classes_config']
-        if 'classified_element' in config:
-            self.classified_element_config = config['classified_element_config']
-        else:
-            self.classified_element_config['point_color'] = 'green'
-            self.classified_element_config['point_marker'] = '*'
+        self.classified_element_config = config['classified_element_config']
 
     def create_datatable(self, csv_file_path: str, traits_ids: List[int], classes_config: List[ClassSchema],
                          test_group_size: float) -> DataTable:
@@ -46,7 +42,7 @@ class Analyzer:
         ChartWizard.set_chart_labels(leaf_trait_id_and_name.get(self.x_axis_trait_id),
                                      leaf_trait_id_and_name.get(self.y_axis_trait_id))
         for key, dataset in self.datatable.class_id_with_train_dataset.items():
-            points: List[Point] = ConverterDatasetElementsToPoints.convert(dataset, self.x_axis_trait_id,
+            points: List[Point] = ConverterDatasetElementsPoints.to_points(dataset, self.x_axis_trait_id,
                                                                            self.y_axis_trait_id)
             point_color: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, key, 'point_color')
             point_marker: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, key, 'point_marker')
