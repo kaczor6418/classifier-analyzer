@@ -1,15 +1,10 @@
-from typing import TypedDict
+from typing import TypedDict, Optional
 
-from src.classifiers.types.ClassifeirsTypes import ClassifierType
 from src.calculators.types.CalculatorType import CalculatorType
+from src.classifiers.types.ClassifeirsTypes import ClassifierType
 
 
-class NNClassification(TypedDict):
-    type: ClassifierType  # accepts only NN
+class ClassificationSchema(TypedDict):
+    type: ClassifierType
     calculator: CalculatorType
-
-
-class KNNClassification(TypedDict):
-    type: ClassifierType  # accepts only KNN
-    calculator: CalculatorType
-    k: int
+    k: Optional[int]

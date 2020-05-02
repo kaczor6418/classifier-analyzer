@@ -7,15 +7,10 @@ from src.calculators.StandardDevationCalculator import StandardDeviationCalculat
 
 
 class CalculatorsFactory:
-    standard_deviation_calculator: StandardDeviationCalculator
-    euclides_distance_calculator: EuclidesDistanceCalculator
 
-    def __init__(self, compared_traits: List[int]) -> None:
-        self.standard_deviation_calculator = StandardDeviationCalculator(compared_traits)
-        self.euclides_distance_calculator = EuclidesDistanceCalculator(compared_traits)
-
-    def get_calculator(self, calculator_type: CalculatorType) -> AbstractCalculator:
+    @staticmethod
+    def get_calculator(calculator_type: CalculatorType, compared_traits: List[int]) -> AbstractCalculator:
         if calculator_type == CalculatorType.DEVIATION:
-            return self.standard_deviation_calculator
+            return StandardDeviationCalculator(compared_traits)
         if calculator_type == CalculatorType.EUCLIDES:
-            return self.euclides_distance_calculator
+            return EuclidesDistanceCalculator(compared_traits)

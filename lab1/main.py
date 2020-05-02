@@ -1,5 +1,6 @@
 from typing import List
 
+from src.calculators.types.CalculatorType import CalculatorType
 from src.classifiers.ClassifierKNN import ClassifierKNN
 from src.classifiers.ClassifierNN import ClassifierNN
 from src.converters.ConverterDatasetElementsToPoints import ConverterDatasetElementsToPoints
@@ -28,7 +29,7 @@ def run_nn_classification():
         ChartWizard.append_points(points, 'red', 's')
     for test_leaf in leafs_database.test_dataset:
         test_leaf_point: Point = test_leaf.create_point_from_traits(trait_x_id, trait_y_id)
-        classifier_nn: ClassifierNN = ClassifierNN(leafs_database.train_dataset, chosen_traits)
+        classifier_nn: ClassifierNN = ClassifierNN(leafs_database.train_dataset, chosen_traits, CalculatorType.EUCLIDES)
         classified_leaf_id: int = classifier_nn.classify(test_leaf.metadata)
         ChartWizard.append_point_with_annotation_to_chart(test_leaf_point, leaf_id_and_name.get(classified_leaf_id),
                                                           'green', '*')
@@ -45,7 +46,8 @@ def run_knn_classification():
         ChartWizard.append_points(points, 'blue', 'o')
     for test_leaf in leafs_database.test_dataset:
         test_leaf_point: Point = test_leaf.create_point_from_traits(trait_x_id, trait_y_id)
-        classifier_knn: ClassifierKNN = ClassifierKNN(leafs_database.train_dataset, chosen_traits, k)
+        classifier_knn: ClassifierKNN = ClassifierKNN(leafs_database.train_dataset, chosen_traits,
+                                                      CalculatorType.EUCLIDES, k)
         classified_leaf_id: int = classifier_knn.classify(test_leaf.metadata)
         ChartWizard.append_point_with_annotation_to_chart(test_leaf_point, leaf_id_and_name.get(classified_leaf_id),
                                                           'green', '*')

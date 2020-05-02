@@ -3,25 +3,20 @@ from typing import List, Dict
 
 import numpy as np
 
-from src.structures.DatasetElement import DatasetElement
 from src.calculators.types.CalculatorType import CalculatorType
-from src.factories.CalculatorsFactory import CalculatorsFactory
-from src.calculators.AbstractCalculator import AbstractCalculator
+from src.classifiers.AbstractClassifier import AbstractClassifier
 from src.classifiers.types.NearestElement import NearestElement
+from src.structures.DatasetElement import DatasetElement
 from src.utils.ClassifiersUtils import ClassifiersUtils
 
 
-class ClassifierKNN:
-    train_group: List[DatasetElement]
-    calculator: AbstractCalculator
-    k: int
+class ClassifierKNN(AbstractClassifier):
+    k: int = 3
 
-    def __init__(self, train_group: List[DatasetElement], compared_traits: List[int], k: int,
-                 calculator_type: CalculatorType = CalculatorType.EUCLIDES) -> None:
-        calculator_factory: CalculatorsFactory = CalculatorsFactory(compared_traits)
+    def __init__(self, train_group: List[DatasetElement], compared_traits: List[int], calculator_type: CalculatorType,
+                 k: int) -> None:
+        super().__init__(train_group, compared_traits, calculator_type)
         self.k = k
-        self.train_group = train_group
-        self.calculator = calculator_factory.get_calculator(calculator_type)
 
     def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
