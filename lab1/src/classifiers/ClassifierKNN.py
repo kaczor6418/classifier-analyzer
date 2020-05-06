@@ -20,15 +20,15 @@ class ClassifierKNN(AbstractClassifier):
 
     def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
-        elements_id_distances: Dict[int, List[float]] = dict()
+        elements_class_id_distances: Dict[int, List[float]] = dict()
         for train_element in self.train_group:
             distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
-            if elements_id_distances.get(train_element.element_id) is None:
-                elements_id_distances[train_element.element_id] = [distance]
+            if elements_class_id_distances.get(train_element.element_class_id) is None:
+                elements_class_id_distances[train_element.element_class_id] = [distance]
             else:
-                elements_id_distances.get(train_element.element_id).append(distance)
-        for nn_id, nn_distances in elements_id_distances.items():
+                elements_class_id_distances.get(train_element.element_class_id).append(distance)
+        for nn_id, nn_distances in elements_class_id_distances.items():
             sum_of_distances_to_k_nn = sum(sorted(nn_distances, key=float)[:self.k])
             if sum_of_distances_to_k_nn < nearest_element_id_distance['distance']:
                 nearest_element_id_distance = ClassifiersUtils.create_nearest_element(nn_id, sum_of_distances_to_k_nn)
-        return nearest_element_id_distance['element_id']
+        return nearest_element_id_distance['element_class_id']

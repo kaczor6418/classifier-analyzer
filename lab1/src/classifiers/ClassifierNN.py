@@ -21,6 +21,6 @@ class ClassifierNN(AbstractClassifier):
         for train_element in self.train_group:
             distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
             if distance < nearest_element_id_distance['distance']:
-                nearest_element_id_distance = ClassifiersUtils.create_nearest_element(train_element.element_id,
+                nearest_element_id_distance = ClassifiersUtils.create_nearest_element(train_element.element_class_id,
                                                                                       distance)
-        return nearest_element_id_distance['element_id']
+        return nearest_element_id_distance['element_class_id']

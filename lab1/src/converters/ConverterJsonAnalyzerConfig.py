@@ -30,8 +30,8 @@ class ConverterJsonToAnalyzerConfig:
     @staticmethod
     def to_classification_config(json_config: ClassificationSchemaDTO) -> ClassificationSchema:
         converted: ClassificationSchema = dict()
-        converted['type'] = ConverterStringClassifierType.to_enum(json_config['type'])
-        converted['calculator'] = ConverterStringCalculatorType.to_enum(json_config['calculator'])
+        converted['type'] = ConverterStringClassifierType.to_classifier_type(json_config['type'])
+        converted['calculator'] = ConverterStringCalculatorType.to_calculator_type(json_config['calculator'])
         if 'k' in json_config:
             converted['k'] = json_config['k']
         return converted

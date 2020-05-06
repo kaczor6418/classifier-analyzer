@@ -14,7 +14,7 @@ class AbstractClassifier(ABC):
     calculator: AbstractCalculator
 
     def __init__(self, train_group: List[DatasetElement], compared_traits: List[int],
-                 calculator_type: CalculatorType = CalculatorType.EUCLIDES) -> None:
+                 calculator_type: CalculatorType) -> None:
         self.train_group = train_group
         self.calculator = CalculatorsFactory.get_calculator(calculator_type, compared_traits)
 

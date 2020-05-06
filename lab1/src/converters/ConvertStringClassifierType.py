@@ -4,5 +4,5 @@ from src.classifiers.types.ClassifeirsTypes import ClassifierType
 class ConverterStringClassifierType:
 
     @staticmethod
-    def to_enum(key: str) -> ClassifierType:
+    def to_classifier_type(key: str) -> ClassifierType:
         return ClassifierType[key]
