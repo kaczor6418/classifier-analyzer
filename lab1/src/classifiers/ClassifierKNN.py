@@ -21,8 +21,12 @@ class ClassifierKNN(AbstractClassifier):
     def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
         elements_class_id_distances: Dict[int, List[float]] = dict()
+        test_traits_values: np.ndarray = ClassifiersUtils.get_values_by_indexes(test_element,
+                                                                                self.compared_traits)
         for train_element in self.train_group:
-            distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
+            train_traits_values: np.ndarray = ClassifiersUtils.get_values_by_indexes(train_element.metadata,
+                                                                                     self.compared_traits)
+            distance: float = self.calculator.calculate_similarity(test_traits_values, train_traits_values)
             if elements_class_id_distances.get(train_element.element_class_id) is None:
                 elements_class_id_distances[train_element.element_class_id] = [distance]
             else:

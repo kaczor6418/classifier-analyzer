@@ -11,12 +11,14 @@ from src.structures.DatasetElement import DatasetElement
 
 class AbstractClassifier(ABC):
     train_group: List[DatasetElement]
+    compared_traits: List[int]
     calculator: AbstractCalculator
 
     def __init__(self, train_group: List[DatasetElement], compared_traits: List[int],
                  calculator_type: CalculatorType) -> None:
         self.train_group = train_group
-        self.calculator = CalculatorsFactory.get_calculator(calculator_type, compared_traits)
+        self.compared_traits = compared_traits
+        self.calculator = CalculatorsFactory.get_calculator(calculator_type)
 
     @abstractmethod
     def classify(self, test_element: np.ndarray) -> int:

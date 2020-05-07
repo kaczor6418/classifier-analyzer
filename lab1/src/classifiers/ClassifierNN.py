@@ -18,8 +18,12 @@ class ClassifierNN(AbstractClassifier):
 
     def classify(self, test_element: np.ndarray) -> int:
         nearest_element_id_distance: NearestElement = ClassifiersUtils.create_nearest_element(-1, math.inf)
+        test_traits_values: np.ndarray = ClassifiersUtils.get_values_by_indexes(test_element,
+                                                                                self.compared_traits)
         for train_element in self.train_group:
-            distance: float = self.calculator.calculate_similarity(test_element, train_element.metadata)
+            train_traits_values: np.ndarray = ClassifiersUtils.get_values_by_indexes(train_element.metadata,
+                                                                                     self.compared_traits)
+            distance: float = self.calculator.calculate_similarity(test_traits_values, train_traits_values)
             if distance < nearest_element_id_distance['distance']:
                 nearest_element_id_distance = ClassifiersUtils.create_nearest_element(train_element.element_class_id,
                                                                                       distance)

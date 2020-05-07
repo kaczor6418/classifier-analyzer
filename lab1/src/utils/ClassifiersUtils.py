@@ -14,8 +14,5 @@ class ClassifiersUtils:
         }
 
     @staticmethod
-    def get_values_by_indexes(array: np.ndarray, indexes: List[int]) -> List[float]:
-        filtered_array: List[float] = []
-        for i in indexes:
-            filtered_array.append(array[i])
-        return filtered_array
+    def get_values_by_indexes(array: np.ndarray, indexes: List[int]) -> np.ndarray:
+        return np.array([array[i] for i in indexes])
