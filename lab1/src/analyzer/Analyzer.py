@@ -27,7 +27,8 @@ class Analyzer:
                                                config['test_group_size'])
         self.classifier = ClassifiersFactory.get_classifier(config['classification_config'],
                                                             self.datatable.train_dataset,
-                                                            self.datatable.chosen_traits)
+                                                            self.datatable.chosen_traits,
+                                                            list(self.datatable.class_id_with_train_dataset.keys()))
         self.x_axis_trait_id = config['x_axis_trait_id']
         self.y_axis_trait_id = config['y_axis_trait_id']
         self.classes_config = config['classes_config']
