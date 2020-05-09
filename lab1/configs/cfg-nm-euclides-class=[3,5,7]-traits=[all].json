@@ -19,11 +19,6 @@
       "id": 7,
       "point_color": "brown",
       "point_marker": "+"
-    },
-    {
-      "id": 9,
-      "point_color": "blue",
-      "point_marker": "1"
     }
   ],
   "classification_config": {
