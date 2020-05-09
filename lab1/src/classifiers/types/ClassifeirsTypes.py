@@ -1,7 +1,7 @@
-from enum import Enum, auto
+from enum import Enum
 
 
 class ClassifierType(Enum):
-    NN = auto()
-    KNN = auto()
-    NM = auto()
+    NN = 'NN'
+    KNN = 'KNN'
+    NM = 'NM'

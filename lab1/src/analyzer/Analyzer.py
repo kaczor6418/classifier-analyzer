@@ -2,6 +2,7 @@ from typing import List
 
 from src.analyzer.types.AnalyzerSchema import AnalyzerSchema
 from src.analyzer.types.ClassesSchema import ClassSchema
+from src.analyzer.types.ClassificationSchema import ClassificationSchema
 from src.analyzer.types.ClassifiedElementSchema import ClassifiedElementSchema
 from src.classifiers.AbstractClassifier import AbstractClassifier
 from src.converters.ConverterDatasetElementsPoints import ConverterDatasetElementsPoints
@@ -33,21 +34,31 @@ class Analyzer:
         self.y_axis_trait_id = config['y_axis_trait_id']
         self.classes_config = config['classes_config']
         self.classified_element_config = config['classified_element_config']
+        self.init_chart_wizard(config['classification_config'])
 
-    def create_datatable(self, csv_file_path: str, traits_ids: List[int], classes_config: List[ClassSchema],
+    @staticmethod
+    def create_datatable(csv_file_path: str, traits_ids: List[int], classes_config: List[ClassSchema],
                          test_group_size: float) -> DataTable:
         classes_ids = list(map(lambda class_item: class_item['id'], classes_config))
         return DataTable(csv_file_path, classes_ids, traits_ids, test_group_size)
 
-    def run_analysis(self) -> None:
+    @staticmethod
+    def build_chart_title(classifier: ClassificationSchema) -> str:
+        return 'Classification: ' + classifier['type'].value + ', Calculator: ' + classifier['calculator'].value
+
+    def init_chart_wizard(self, classifier: ClassificationSchema) -> None:
+        ChartWizard.set_chart_title(Analyzer.build_chart_title(classifier))
         ChartWizard.set_chart_labels(leaf_trait_id_and_name.get(self.x_axis_trait_id),
                                      leaf_trait_id_and_name.get(self.y_axis_trait_id))
-        for key, dataset in self.datatable.class_id_with_train_dataset.items():
+
+    def run_analysis(self) -> None:
+        for class_id, dataset in self.datatable.class_id_with_train_dataset.items():
             points: List[Point] = ConverterDatasetElementsPoints.to_points(dataset, self.x_axis_trait_id,
                                                                            self.y_axis_trait_id)
-            point_color: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, key, 'point_color')
-            point_marker: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, key, 'point_marker')
-            ChartWizard.append_points(points, point_color, point_marker)
+            point_color: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, class_id, 'point_color')
+            point_marker: str = Utils.get_key_value_by_id_from_dictionaries(self.classes_config, class_id,
+                                                                            'point_marker')
+            ChartWizard.append_points(points, point_color, point_marker, leaf_id_and_name.get(class_id))
         for test_item in self.datatable.test_dataset:
             test_point: Point = test_item.create_point_from_traits(self.x_axis_trait_id, self.y_axis_trait_id)
             classified_element_id: int = self.classifier.classify(test_item.metadata)

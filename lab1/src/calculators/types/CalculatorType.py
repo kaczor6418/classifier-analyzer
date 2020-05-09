@@ -1,6 +1,6 @@
-from enum import Enum, auto
+from enum import Enum
 
 
 class CalculatorType(Enum):
-    DEVIATION = auto()
-    EUCLIDES = auto()
+    DEVIATION = 'DEVIATION'
+    EUCLIDES = 'EUCLIDES'
