@@ -16,9 +16,9 @@ class ClassifierNM(AbstractClassifier):
     def __init__(self, train_group: List[DatasetElement], compared_traits: List[int],
                  calculator_type: CalculatorType, classes_ids: List[int]) -> None:
         super().__init__(train_group, compared_traits, calculator_type)
-        self.set_average_positions(classes_ids)
+        self.calculate_average_positions(classes_ids)
 
-    def set_average_positions(self, classes_ids: List[int]):
+    def calculate_average_positions(self, classes_ids: List[int]):
         class_number_of_occurrences: Dict[int, int] = dict()
         for dataset in self.train_group:
             if dataset.element_class_id in classes_ids:
