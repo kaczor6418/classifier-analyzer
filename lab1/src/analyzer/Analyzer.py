@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 from src.analyzer.types.AnalyzerSchema import AnalyzerSchema
@@ -16,6 +17,10 @@ from src.utils.Utils import Utils
 
 
 class Analyzer:
+    classification_time: float = 0.0
+    invalid_classifications_counter: int = 0
+    valid_classifications_counter: int = 0
+
     x_axis_trait_id: int
     y_axis_trait_id: int
     datatable: DataTable
@@ -46,6 +51,12 @@ class Analyzer:
     def build_chart_title(classifier: ClassificationSchema) -> str:
         return 'Classification: ' + classifier['type'].value + ', Calculator: ' + classifier['calculator'].value
 
+    def update_classifier_effectiveness(self, classified_id: int, original_id: int) -> None:
+        if classified_id == original_id:
+            self.valid_classifications_counter += 1
+        else:
+            self.invalid_classifications_counter += 1
+
     def init_chart_wizard(self, classifier: ClassificationSchema) -> None:
         ChartWizard.set_chart_title(Analyzer.build_chart_title(classifier))
         ChartWizard.set_chart_labels(leaf_trait_id_and_name.get(self.x_axis_trait_id),
@@ -61,8 +72,23 @@ class Analyzer:
             ChartWizard.append_points(points, point_color, point_marker, leaf_id_and_name.get(class_id))
         for test_item in self.datatable.test_dataset:
             test_point: Point = test_item.create_point_from_traits(self.x_axis_trait_id, self.y_axis_trait_id)
+            start: float = time.process_time()
             classified_element_id: int = self.classifier.classify(test_item.metadata)
+            end: float = time.process_time()
+            self.classification_time += (end - start)
+            self.update_classifier_effectiveness(classified_element_id, test_item.element_class_id)
             ChartWizard.append_point_with_annotation_to_chart(test_point, leaf_id_and_name.get(classified_element_id),
                                                               self.classified_element_config['point_color'],
                                                               self.classified_element_config['point_marker'])
+
+    def calculate_classification_effectiveness(self) -> float:
+        return self.valid_classifications_counter / (
+                self.valid_classifications_counter + self.invalid_classifications_counter)
+
+    def show_results(self) -> None:
+        print('Time needed for classification: ' + str(self.classification_time))
+        print('Valid classifications count: ' + str(self.valid_classifications_counter))
+        print('Invalid classifications count: ' + str(self.invalid_classifications_counter))
+        print('Classification effectiveness: ' + '{:.2%}'.format(self.calculate_classification_effectiveness()))
         ChartWizard.draw_chart()
+        print('-------------------------------------------------------------------------------------------------------')
