@@ -13,9 +13,9 @@ def create_analysis(config_path: str) -> None:
     analyzer.show_results()
 
 
-create_analysis('config/cfg-nn-euclides-class=[3,5,7]-traits=[all].json')
-create_analysis('config/cfg-knn-euclides-k=3-class=[3,5,7]-traits=[all].json')
-create_analysis('config/cfg-nm-euclides-class=[3,5,7]-traits=[all].json')
-create_analysis('config/cfg-nn-deviation-class=[3,5,7]-traits=[all].json')
-create_analysis('config/cfg-knn-deviation-k=3-class=[3,5,7]-traits=[all].json')
-create_analysis('config/cfg-nm-deviation-class=[3,5,7]-traits=[all].json')
+create_analysis('config/cfg-nn-euclides-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
+create_analysis('config/cfg-nn-deviation-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
+create_analysis('config/cfg-knn-euclides-k=3-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
+create_analysis('config/cfg-knn-deviation-k=3-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
+create_analysis('config/cfg-nm-euclides-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
+create_analysis('config/cfg-nm-deviation-class=[3,5,7]-traits=[3,4,6,7,8,11].json')
