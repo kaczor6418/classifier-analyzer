@@ -11,11 +11,12 @@ from src.utils.ClassifiersUtils import ClassifiersUtils
 
 
 class ClassifierNM(AbstractClassifier):
-    average_classes_positions: Dict[int, np.ndarray] = dict()
+    average_classes_positions: Dict[int, np.ndarray]
 
     def __init__(self, train_group: List[DatasetElement], compared_traits: List[int],
                  calculator_type: CalculatorType, classes_ids: List[int]) -> None:
         super().__init__(train_group, compared_traits, calculator_type)
+        self.average_classes_positions = dict()
         self.calculate_average_positions(classes_ids)
 
     def calculate_average_positions(self, classes_ids: List[int]):
